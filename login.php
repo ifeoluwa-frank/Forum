@@ -2,7 +2,7 @@
     session_start();
     include_once "db.php";
     if(isset($_POST['btnSubmit'])){
-//        global $conn;
+        global $conn;
 //        var_export($_POST);
 
         $username = htmlspecialchars($_POST['uname']);
