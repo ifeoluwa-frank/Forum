@@ -10,3 +10,10 @@ CREATE TABLE user_credentials(
     password VARCHAR(255) NOT NULL
 );
 
+
+CREATE TABLE post_data(
+    post_id INT AUTO INCREMENT PRIMARY KEY,
+    post_title VARCHAR(255) NOT NULL,
+    post_category VARCHAR(255) NOT NULL,
+    post_content LONGTEXT NOT NULL
+);

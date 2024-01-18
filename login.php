@@ -14,11 +14,12 @@
 //            echo "Connection successful";
 //            print_r($data);
             $_SESSION['user_id'] = $data['id'];
+            $_SESSION['user_name'] = $data['username'];
+            $_SESSION['full_name'] = $data['firstname'] . " " . $data['lastname'];
             header('Location: index.php');
         }else {
             echo "Invalid login credentials";
         }
-        print_r($_SESSION);
 
     }
 ?>
