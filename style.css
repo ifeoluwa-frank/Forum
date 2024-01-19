@@ -159,8 +159,14 @@ aside {
 }
 
 .post-container {
-    margin: 0 12.5%;
+    /*margin: 0 12.5%;*/
     padding: 0 10px;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 20px;
+}
+.post-container {
+    margin-top: 30px;
 }
 
 .post-title {

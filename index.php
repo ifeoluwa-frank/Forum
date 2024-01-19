@@ -6,6 +6,8 @@
     $posts = mysqli_query($conn, "SELECT * FROM post_data AS posts, user_credentials AS users WHERE posts.post_author_id = users.id");
 //    print_r($posts);
 
+$results = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+
 ?>
 
 
@@ -30,7 +32,12 @@
                     <?php foreach ($posts as $post) { ?>
                     <h3><?php echo $post['post_title'] ?></h3>
                     <img src="img/post-img.jpg" alt="post-image" height="150" width="600" />
-                    <p><?php echo $post['post_content'] ?></p>
+                    <p><?php echo $post['post_content']; ?></p>
+                        <?php// if($post['post_author_id'] == $_SESSION['user_id']) {?>
+<!--                                <em><a href="post.php">Edit</a> </em>-->
+
+                        <?php //} ?>
+
                         <p><i><?php echo $post['firstname']. " " . $post['lastname']; ?></i></p>
                     <?php } ?>
 
