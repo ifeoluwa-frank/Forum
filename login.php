@@ -1,6 +1,9 @@
 <?php
     session_start();
     include_once "db.php";
+
+    $data = "";
+    $error = "";
     if(isset($_POST['btnSubmit'])){
         global $conn;
 //        var_export($_POST);
@@ -10,7 +13,7 @@
 
         $query = mysqli_query($conn, "SELECT * FROM user_credentials WHERE username = '$username' AND password = '$password'");
         $data = mysqli_fetch_array($query);
-        if($query){
+        if($data){
 //            echo "Connection successful";
 //            print_r($data);
             $_SESSION['user_id'] = $data['id'];
@@ -18,7 +21,7 @@
             $_SESSION['full_name'] = $data['firstname'] . " " . $data['lastname'];
             header('Location: index.php');
         }else {
-            echo "Invalid login credentials";
+            $error = "Invalid login credentials";
         }
 
     }
@@ -45,6 +48,7 @@
                 <input type="password" placeholder="Enter Password" name="pword" required>
 
                 <button type="submit" class="btn" name="btnSubmit"><b>Login</b></button>
+                <i class="error"><?php echo $error; ?></i>
 
                 <p>Don't have an account? <a href="signup.php">Signup</a>
             </div>

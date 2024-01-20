@@ -35,7 +35,7 @@
                     <img src="img/post-img.jpg" alt="post-image" height="150" width="600" />
                     <p><?php echo $post['post_content']; ?></p>
                         <?php if($post['post_author_id'] == $_SESSION['user_id']) {?>
-                              <a href="delete.php?post_id=<?php echo $post['post_id'] ?>" class="btnDelete">Delete<?php echo $post['post_id']; ?></a>
+                              <a href="delete.php?post_id=<?php echo $post['post_id'] ?>" class="btnDelete">Delete Post</a>
                         <?php } ?>
 
                         <p><i><?php echo $post['firstname']. " " . $post['lastname']; ?></i></p>
