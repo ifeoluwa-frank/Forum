@@ -19,7 +19,6 @@ function handleEdit(post){
     console.log(postTitle);
 
     btnClear.removeAttribute('hidden');
-    btnDelete.removeAttribute('hidden');
 }
 
 function clearField(){
@@ -29,8 +28,4 @@ function clearField(){
     postId.value = "";
 
     btnClear.setAttribute('hidden', true);
-    btnDelete.setAttribute('hidden', true);
 }
-// function btnDelete(post){
-//
-// }

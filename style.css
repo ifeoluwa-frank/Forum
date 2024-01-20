@@ -106,7 +106,9 @@ input[type=text], input[type=password], input[type=email], select {
     color: white;
 }
 
-
+header a{
+    text-decoration: none;
+}
 .general_container{
     width: 1200px;
     margin: 0 auto;

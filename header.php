@@ -11,7 +11,7 @@
 
     <header>
         <div class="toppage">
-            <h1 class="home">Discuss...</h1>
+            <a href="index.php"><h1 class="home">Discuss...</h1></a>
         </div>
         <div class="toppage">
             <?php if(!isset($_SESSION['user_id'])){?>

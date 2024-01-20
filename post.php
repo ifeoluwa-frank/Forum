@@ -24,17 +24,9 @@ if(isset($_POST['btnSubmit'])){
         $sql->execute();
     }
 }
-    $posts = mysqli_query($conn, "SELECT * FROM post_data WHERE post_author_id = '$authorId'");
-//    print_r($posts);
-//    echo $_SESSION['user_name'];
-    $results = mysqli_fetch_all($posts, MYSQLI_ASSOC);
 
-//    if(isset($_POST['btnDelete'])){
-//        $postId = htmlspecialchars($_POST['post_id']);
-//        $sql = $conn->prepare("DELETE FROM post_data WHERE post_id = ?");
-//        $sql->bind_param("i", $postId);
-//        $sql->execute();
-//    }
+    $posts = mysqli_query($conn, "SELECT * FROM post_data WHERE post_author_id = '$authorId'");
+    $results = mysqli_fetch_all($posts, MYSQLI_ASSOC);
 
 
 ?>
@@ -61,7 +53,7 @@ if(isset($_POST['btnSubmit'])){
                 </ul>
             <?php endforeach; ?>
             <button name="clearfield" onclick="clearField()" class="btn clear-field" hidden>Clear Input</button>
-            <button name="btnDelete"  onclick="btnDelete(<?php echo json_encode($sql); ?>)" class="btnDelete" hidden>Delete Post</button>
+
         </div>
         <form method="post" action="post.php">
             <label><b>Post Title</b></label>
