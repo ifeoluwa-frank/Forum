@@ -32,11 +32,17 @@
 
                     <?php foreach ($posts as $post) { ?>
                     <h3><?php echo $post['post_title'] ?></h3>
-                    <img src="img/post-img.jpg" alt="post-image" height="150" width="600" />
+                        <?php if($post['post_image'] != NULL){ ?>
+                                    <img src="<?php echo $post['post_image']; ?>" height="269" width="268"/>
+                                <?php } else {?>
+                                    <img src="img/post-img.jpg" alt="post-image" height="150" width="600" />
+                                <?php } ?>
                     <p><?php echo $post['post_content']; ?></p>
-                        <?php if($post['post_author_id'] == $_SESSION['user_id']) {?>
-                              <a href="delete.php?post_id=<?php echo $post['post_id'] ?>" class="btnDelete">Delete Post</a>
-                        <?php } ?>
+                        <?php if(@$_SESSION['user_id']) { ?>
+                                    <?php if($post['post_author_id'] == $_SESSION['user_id']) {?>
+                                          <a href="delete.php?post_id=<?php echo $post['post_id'] ?>" class="btnDelete">Delete Post</a>
+                                    <?php } ?>
+                                <?php } ?>
 
                         <p><i><?php echo $post['firstname']. " " . $post['lastname']; ?></i></p>
                     <?php } ?>

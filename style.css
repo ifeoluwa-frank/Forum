@@ -185,3 +185,7 @@ textarea {
     color: red;
     margin-left: 50px;
 }
+
+.post-image {
+    margin-bottom: 20px;
+}

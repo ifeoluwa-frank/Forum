@@ -17,3 +17,6 @@ CREATE TABLE post_data(
     post_category VARCHAR(255) NOT NULL,
     post_content LONGTEXT NOT NULL
 );
+
+ALTER TABLE post_data
+ADD COLUMN post_image VARCHAR(255);
