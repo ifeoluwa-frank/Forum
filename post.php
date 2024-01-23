@@ -84,22 +84,12 @@ if(isset($_POST['btnSubmit'])){
 <body>
 <div class="post_general_container">
     <?php include('header.php'); ?>
-    <main class="post-container">
-        <div>
-            <h3>My post history</h3>
-            <?php foreach ($results as $post): ?>
-                <ul>
-                    <li><a onclick='handleEdit(<?php echo json_encode($post); ?>)' href='#' class='post-update'><?php echo $post['post_title']; ?></a></li>
-                </ul>
-            <?php endforeach; ?>
-            <button name="clearfield" onclick="clearField()" class="btn clear-field" hidden>Clear Input</button>
-
-        </div>
-        <form method="post" action="post.php" enctype="multipart/form-data">
+    <div class="post-container">
+        <form method="post" action="post.php" class="post-form" enctype="multipart/form-data">
             <label><b>Post Title</b></label>
             <input type="text" name="post-title" class="post-title" />
 
-            <label><b>Post Category</b></label><br>
+            <label><b class="">Post Category</b></label><br>
             <select name="categories" class="select-category">
                 <option value="sports">Sports</option>
                 <option value="entertainment">Entertainment</option>
@@ -112,14 +102,38 @@ if(isset($_POST['btnSubmit'])){
             <input type="file" name="post-image" class="post-image" /><br>
 
             <label><b>Post Content</b></label><br>
-            <textarea name="post-content" class="field content" rows="12" cols="112"></textarea>
+            <textarea name="post-content" class="field content" rows="12" cols="90"></textarea>
 
             <input class="post_id" name="post_id" type="hidden" />
 
             <button class="btn btn-update" type="submit" name="btnSubmit">Post</button>
         </form>
+        <div class="post-history">
+            <h3 class="my-post-title">My post history</h3>
+            <?php foreach ($results as $post): ?>
+                <ul>
+                    <li class="title-list">
+                        <svg xmlns="http://www.w3.org/2000/svg"
 
-    </main>
+                             fill="none" viewBox="0 0 24 24"
+                             stroke-width="1.5"
+                             stroke="currentColor"
+                             class="history-categories-icon">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                        </svg>
+                        <a onclick='handleEdit(<?php echo json_encode($post); ?>)'  href="#" class='post-update'>
+                           <?php echo $post['post_title']; ?></a>
+                    </li>
+                </ul>
+            <?php endforeach; ?>
+            <button name="clearfield" onclick="clearField()" class="btn clear-field" hidden>Clear Input</button>
+
+        </div>
+    </div>
+    <?php include('footer.php'); ?>
+</div>
 </body>
 <script src="script.js"></script>
 </html>
