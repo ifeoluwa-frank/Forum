@@ -7,7 +7,8 @@ $authorId = $_SESSION['user_id'];
 if(!isset($_SESSION['user_id']) && empty($_SESSION['user_id'])){ header('Location: login.php'); exit();}
 $target_dir = "uploads/";
 
-//$uploadOK = 1;
+$categories = mysqli_query($conn, "SELECT * FROM post_category");
+$postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
 
 
 if(isset($_POST['btnSubmit'])){
@@ -19,7 +20,6 @@ if(isset($_POST['btnSubmit'])){
     $postId = htmlspecialchars($_POST['post_id']);
 
 
-//    $check = getimagesize($_FILES['post-image']['tmp_name']);
 
     if(isset($_FILES['post-image']) && !empty($_FILES['post-image']['name'])) {
         $target_file = $target_dir . basename($_FILES['post-image']['name']);
@@ -28,11 +28,9 @@ if(isset($_POST['btnSubmit'])){
         $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
         if (in_array($imageFileType, $allowTypes)) {
             $image = $_FILES['post-image']['tmp_name'];
-//            $imgContent = addslashes(file_get_contents($image));
             move_uploaded_file($image, $target_file);
 
             $imagePath = $target_file;
-//            echo $imagePath;
 
             if($postId != ""){
                 $sql = $conn->prepare("UPDATE post_data SET post_title = ?, post_author_id = ?, post_category = ?, post_content = ?, post_image = ? WHERE post_id = ?");
@@ -91,11 +89,9 @@ if(isset($_POST['btnSubmit'])){
 
             <label><b class="">Post Category</b></label><br>
             <select name="categories" class="select-category">
-                <option value="sports">Sports</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="music">Music</option>
-                <option value="fashion">Fashion</option>
-                <option value="politics">Politics</option>
+                <?php foreach ($categories as $category){ ?>
+                    <option value="<?php echo $category['category_id'] ?>"><?php echo $category['category'] ?></option>
+                <?php } ?>
             </select>
 
             <label><b>Post Image</b></label><br>

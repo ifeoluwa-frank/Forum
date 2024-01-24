@@ -18,5 +18,12 @@ CREATE TABLE post_data(
     post_content LONGTEXT NOT NULL
 );
 
+
 ALTER TABLE post_data
 ADD COLUMN post_image VARCHAR(255);
+
+
+CREATE TABLE post_category(
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(255) NOT NULL
+);

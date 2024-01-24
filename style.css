@@ -297,7 +297,12 @@ textarea {
     margin-top: 15px;
     background-color: #f8f9fa;
     border-radius: 10px;
+    padding: 10px 0;
 }
 .btnDelete {
     margin-top: 4px;
+}
+
+.addNewCat {
+    width: 50%;
 }
