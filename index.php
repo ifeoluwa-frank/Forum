@@ -6,12 +6,17 @@
 
     global $conn;
 
-    $posts = mysqli_query($conn, "SELECT * FROM post_data AS posts, user_credentials AS users WHERE posts.post_author_id = users.id");
-    $results = mysqli_fetch_all($posts, MYSQLI_ASSOC);
-
+    if(isset($_GET['category_id']) && $_GET['category_id'] != ""){
+        $getCategory = $_GET['category_id'];
+        $posts = mysqli_query($conn, "SELECT * FROM post_data AS posts, user_credentials AS users WHERE posts.post_author_id = users.id AND posts.post_category = '$getCategory'");
+        $results = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+    } else {
+        $posts = mysqli_query($conn, "SELECT * FROM post_data AS posts, user_credentials AS users WHERE posts.post_author_id = users.id");
+        $results = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+//        print_r($results);
+    }
     $categories = mysqli_query($conn, "SELECT * FROM post_category");
     $postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
-
 
 ?>
 
@@ -22,6 +27,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Forum to discuss trending matters">
+    <meta name="keyword" content="Forum, discussion, politics, sports">
     <title>My Forum</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -35,7 +42,7 @@
         <div class="post-categories">
             <?php foreach ($categories as $category){ ?>
                 <ul class="categories">
-                    <li><button class="category-button">
+                    <li><a href="index.php?category_id=<?php echo $category['category_id'] ?>"><button class="category-button">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  fill="none"
                                  viewBox="0 0 24 24"
@@ -46,7 +53,7 @@
                                       stroke-linejoin="round"
                                       d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
                             </svg>
-                            <p class="cat"><?php echo $category['category'] ?></p></button></li>
+                            <p class="cat"><?php echo $category['category'] ?></p></button></a></li>
                 </ul>
             <?php } ?>
         </div>
@@ -66,7 +73,7 @@
                                         <?php } else {?>
                                             <img src="img/post-img.jpg" alt="post-image" height="150" width="600" />
                                         <?php } ?>
-                            <p><?php echo $post['post_content']; ?></p>
+                            <p><?php echo substr($post['post_content'], 0, 200); ?>...<a href="singlepost.php?post_id=<?php echo $post['post_id']; ?>">Read more</a></p>
                                 <?php if(isset($_SESSION['user_id'])) { ?>
                                             <?php if($post['post_author_id'] == $_SESSION['user_id']) {?>
                                             <div class="title-list">
