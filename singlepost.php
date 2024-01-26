@@ -6,13 +6,26 @@ $authorID = @$_SESSION['user_id'];
 
 global $conn;
 
+
 if(isset($_GET['post_id']) && $_GET['post_id'] != ""){
     $getPostId = $_GET['post_id'];
     $posts = mysqli_query($conn, "SELECT * FROM post_data AS posts, user_credentials AS users WHERE posts.post_author_id = users.id AND posts.post_id = '$getPostId'");
     $results = mysqli_fetch_all($posts, MYSQLI_ASSOC);
+
+    $sql = mysqli_query($conn, "SELECT read_count FROM post_data WHERE post_data.post_id = '$getPostId'");
+    $postCount = mysqli_fetch_array($sql);
+    $currentCount = $postCount['read_count'] + 1;
+
+    $queryUpdate = mysqli_query($conn, "UPDATE post_data SET post_data.read_count = '$currentCount' WHERE post_data.post_id = '$getPostId'");
+}else {
+    header("Location: index.php");
 }
 $categories = mysqli_query($conn, "SELECT * FROM post_category");
 $postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
+
+$readCount = mysqli_query($conn, "SELECT * FROM post_data ORDER BY read_count DESC LIMIT 6");
+$count = mysqli_fetch_all($readCount, MYSQLI_ASSOC);
+
 
 ?>
 
@@ -99,7 +112,14 @@ $postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
     <aside>
         <div class="sidebar">
             <h3 class="aside">Topic Title</h3>
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+            <?php foreach ($readCount as $row) { ?>
+                <ul>
+                    <li>
+                        <a href="singlepost.php?post_id=<?php echo $row['post_id']; ?>" class="popular-posts"><?php echo $row['post_title']; ?></a>
+                    </li>
+
+                </ul>
+            <?php } ?>
         </div>
     </aside>
 

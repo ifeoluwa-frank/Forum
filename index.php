@@ -18,6 +18,11 @@
     $categories = mysqli_query($conn, "SELECT * FROM post_category");
     $postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
 
+    $readCount = mysqli_query($conn, "SELECT * FROM post_data ORDER BY read_count DESC LIMIT 6");
+    $count = mysqli_fetch_all($readCount, MYSQLI_ASSOC);
+
+
+
 ?>
 
 
@@ -102,10 +107,28 @@
 <!--        SIDEBAR-->
         <aside>
                 <div class="sidebar">
-                    <h3 class="aside">Topic Title</h3>
-                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                    <h3 class="aside">Popular Posts</h3>
+                        <?php foreach ($readCount as $row) { ?>
+                                <ul>
+                                    <li>
+<!--                                        <svg xmlns="http://www.w3.org/2000/svg"-->
+<!--                                             fill="none"-->
+<!--                                             viewBox="0 0 24 24"-->
+<!--                                             stroke-width="1.5"-->
+<!--                                             stroke="currentColor"-->
+<!--                                             class="post-categories-icon">-->
+<!--                                            <path-->
+<!--                                                    stroke-linecap="round"-->
+<!--                                                    stroke-linejoin="round"-->
+<!--                                                    d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />-->
+<!--                                        </svg>-->
+                                        <a href="singlepost.php?post_id=<?php echo $row['post_id']; ?>" class="popular-posts"><?php echo $row['post_title']; ?></a>
+                                    </li>
+
+                                </ul>
+                        <?php } ?>
                 </div>
-            </aside>
+        </aside>
 
 <!--        SVG POST BUTTON-->
         <?php

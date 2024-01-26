@@ -22,6 +22,9 @@ CREATE TABLE post_data(
 ALTER TABLE post_data
 ADD COLUMN post_image VARCHAR(255);
 
+ALTER TABLE post_data
+ADD COLUMN read_count VARCHAR (255);
+
 
 CREATE TABLE post_category(
     category_id INT AUTO_INCREMENT PRIMARY KEY,

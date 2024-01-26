@@ -306,3 +306,9 @@ textarea {
 .addNewCat {
     width: 50%;
 }
+.popular-posts {
+    display: inline-block;
+    margin-left: 15px;
+    margin-bottom: 10px;
+
+}
