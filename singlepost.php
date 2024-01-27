@@ -20,15 +20,12 @@ if(isset($_GET['post_id']) && $_GET['post_id'] != ""){
 }else {
     header("Location: index.php");
 }
-$categories = mysqli_query($conn, "SELECT * FROM post_category");
-$postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
+    $categories = mysqli_query($conn, "SELECT * FROM post_category");
+    $postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
 
-$readCount = mysqli_query($conn, "SELECT * FROM post_data ORDER BY read_count DESC LIMIT 6");
-$count = mysqli_fetch_all($readCount, MYSQLI_ASSOC);
-
-
+    $readCount = mysqli_query($conn, "SELECT * FROM post_data ORDER BY read_count DESC LIMIT 6");
+    $count = mysqli_fetch_all($readCount, MYSQLI_ASSOC);
 ?>
-
 
 
 <!DOCTYPE html>
@@ -99,8 +96,22 @@ $count = mysqli_fetch_all($readCount, MYSQLI_ASSOC);
                             </div>
                         <?php } ?>
                     <?php } ?>
-
-                    <p><i>Author: <?php echo $post['firstname']. " " . $post['lastname']; ?></i></p>
+                    <div class="author-home">
+                        <p><i>Author: <?php echo $post['firstname']. " " . $post['lastname']; ?></i></p>
+                        <div class="back">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="delete-post-icon">
+                                <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                            </svg>
+                            <a href="index.php" class="btnHome">Home</a>
+                        </div>
+                    </div>
                 </div>
             <?php } ?>
 

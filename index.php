@@ -7,19 +7,21 @@
     global $conn;
 
     if(isset($_GET['category_id']) && $_GET['category_id'] != ""){
+        // CATEGORY SORTING
         $getCategory = $_GET['category_id'];
         $posts = mysqli_query($conn, "SELECT * FROM post_data AS posts, user_credentials AS users WHERE posts.post_author_id = users.id AND posts.post_category = '$getCategory'");
         $results = mysqli_fetch_all($posts, MYSQLI_ASSOC);
     } else {
-        $posts = mysqli_query($conn, "SELECT * FROM post_data AS posts, user_credentials AS users WHERE posts.post_author_id = users.id");
+        // POST DISPLAY QUERY BY LATEST POST
+        $posts = mysqli_query($conn, "SELECT * FROM post_data AS posts, user_credentials AS users WHERE posts.post_author_id = users.id ORDER BY post_id DESC ");
         $results = mysqli_fetch_all($posts, MYSQLI_ASSOC);
 //        print_r($results);
     }
-    $categories = mysqli_query($conn, "SELECT * FROM post_category");
-    $postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
+        $categories = mysqli_query($conn, "SELECT * FROM post_category");
+        $postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
 
-    $readCount = mysqli_query($conn, "SELECT * FROM post_data ORDER BY read_count DESC LIMIT 6");
-    $count = mysqli_fetch_all($readCount, MYSQLI_ASSOC);
+        $readCount = mysqli_query($conn, "SELECT * FROM post_data ORDER BY read_count DESC LIMIT 6");
+        $count = mysqli_fetch_all($readCount, MYSQLI_ASSOC);
 
 
 

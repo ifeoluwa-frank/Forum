@@ -312,3 +312,25 @@ textarea {
     margin-bottom: 10px;
 
 }
+
+.author-home {
+    display: flex;
+    justify-content: space-between;
+    /*background-color: red;*/
+}
+
+.btnHome {
+    margin-top: 4px;
+    margin-left: 2px;
+    text-decoration: none;
+}
+
+.back {
+    display: inline-flex;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.back:visited {
+    text-decoration: none;
+}
