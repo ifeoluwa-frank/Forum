@@ -113,6 +113,12 @@ if(isset($_GET['post_id']) && $_GET['post_id'] != ""){
                         </div>
                     </div>
                 </div>
+                <form method="post">
+                    <div class="comment-form">
+                        <textarea class="comment-field" rows="1" cols="50"></textarea>
+                        <button class="comment-submit">Submit</button>
+                    </div>
+                </form>
             <?php } ?>
 
 

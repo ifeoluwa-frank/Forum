@@ -274,7 +274,7 @@ aside {
     margin-top: 4px;
 }
 
-textarea {
+.content {
     padding: 12px 20px;
     margin: 8px 0;
 }
@@ -294,6 +294,9 @@ textarea {
 }
 
 .each-post {
+
+}
+.each-post-post {
     margin-top: 15px;
     background-color: #f8f9fa;
     border-radius: 10px;
@@ -333,4 +336,56 @@ textarea {
 
 .back:visited {
     text-decoration: none;
+}
+
+.comment-form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.comment-field {
+    /*margin-top: 20px;*/
+    border-radius: 20px;
+    border-color: #04AA6D;
+    padding: 12px 20px;
+    /*margin: 8px 0;*/
+}
+.comment-submit {
+    padding: 0 20px;
+    border-radius: 20px;
+    /*margin: 8px 0;*/
+    background-color: #04AA6D;
+    color: white;
+    font-weight: bold;
+    border-color: #04AA6D;
+}
+.like-button {
+    margin-left: 20px;
+    border: none;
+    background-color: #f8f9fa;
+}
+.like-button:hover {
+    cursor: pointer;
+}
+
+.like-icon {
+    width: 30px;
+    height: 30px;
+    stroke: white;
+}
+
+.comment-icon {
+    width: 30px;
+    height: 30px;
+    stroke: white;
+}
+
+.comment-div {
+    display: inline-flex;
+}
+
+.comment-num {
+    margin-top: 6px;
+    font-size: 18px;
 }
