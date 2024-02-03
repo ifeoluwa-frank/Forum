@@ -5,6 +5,7 @@
     $authorID = @$_SESSION['user_id'];
 
     global $conn;
+    $error = "";
 
     if(isset($_GET['category_id']) && $_GET['category_id'] != ""){
         // CATEGORY SORTING
@@ -24,7 +25,21 @@
         $count = mysqli_fetch_all($readCount, MYSQLI_ASSOC);
 
 
+//        if (isset($_POST['btnCommentSubmit'])) {
+//            if(isset($_SESSION['user_id'])) {
+//                $commentContent = htmlspecialchars($_POST['commentContent']);
+//                $postId = $_POST['post_id'];
+//
+//                $sql = $conn->prepare("INSERT INTO post_comment(comment_user_id, comment_content, post_id) VALUES (?, ?, ?)");
+//                $sql->bind_param("isi", $authorID, $commentContent, $postId);
+//                $sql->execute();
+//            } else {
+//                $error = "Kindly login to comment on posts";
+//            }
+//        }
 
+        $comments = mysqli_query($conn, "SELECT * FROM post_comment AS comment, post_data AS posts WHERE comment.post_id = posts.post_id");
+        $postComment = mysqli_fetch_all($comments, MYSQLI_ASSOC);
 ?>
 
 
@@ -113,7 +128,8 @@
                                                 <b class="comment-num">120k</b>
                                             </div>
                                         </button>
-                                        <button class="like-button comment-button" onclick="toggleComment(this)">
+<!--                                        onclick="toggleComment(this)"-->
+                                        <button class="like-button comment-button"  id="comment_form_trigger" data-postId="<?php echo $post['post_id']; ?>" data-user="<?php echo @$_SESSION['user_id']; ?>">
                                             <div class="comment-div">
                                                 <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -129,12 +145,10 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <form method="">
-                                        <div class="comment-form" >
-                                            <textarea class="comment-field" rows="1" cols="50" placeholder="Add a comment..." hidden></textarea>
-                                            <button class="comment-submit" hidden>Submit</button>
-                                        </div>
-                                    </form>
+
+                                    <?php foreach ($comments as $comment) { ?>
+                                        <?php echo $comment['comment_content']; ?>
+                                    <?php } ?>
                                 </div>
                             </div>
                         <?php } ?>
@@ -150,17 +164,6 @@
                         <?php foreach ($readCount as $row) { ?>
                                 <ul>
                                     <li>
-<!--                                        <svg xmlns="http://www.w3.org/2000/svg"-->
-<!--                                             fill="none"-->
-<!--                                             viewBox="0 0 24 24"-->
-<!--                                             stroke-width="1.5"-->
-<!--                                             stroke="currentColor"-->
-<!--                                             class="post-categories-icon">-->
-<!--                                            <path-->
-<!--                                                    stroke-linecap="round"-->
-<!--                                                    stroke-linejoin="round"-->
-<!--                                                    d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />-->
-<!--                                        </svg>-->
                                         <a href="singlepost.php?post_id=<?php echo $row['post_id']; ?>" class="popular-posts"><?php echo $row['post_title']; ?></a>
                                     </li>
 
@@ -187,6 +190,3 @@
 <!--        FOOTER-->
         <?php include('footer.php'); ?>
     </div>
-</body>
-<script src="script.js"></script>
-</html>

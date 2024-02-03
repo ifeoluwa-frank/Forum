@@ -30,3 +30,10 @@ CREATE TABLE post_category(
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     category VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE post_comment(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    comment_user_id INT NOT NULL,
+    post_id INT NOT NULL,
+    comment_content LONGTEXT NOT NULL
+);
