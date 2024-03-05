@@ -37,3 +37,5 @@ CREATE TABLE post_comment(
     post_id INT NOT NULL,
     comment_content LONGTEXT NOT NULL
 );
+ALTER TABLE post_comment
+ADD COLUMN parent_post_comment_id INT

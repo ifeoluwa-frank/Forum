@@ -24,22 +24,14 @@
         $readCount = mysqli_query($conn, "SELECT * FROM post_data ORDER BY read_count DESC LIMIT 6");
         $count = mysqli_fetch_all($readCount, MYSQLI_ASSOC);
 
+        $postIds = mysqli_query($conn, "SELECT post_id FROM post_data");
+        $postId = mysqli_fetch_all($postIds, MYSQLI_ASSOC);
 
-//        if (isset($_POST['btnCommentSubmit'])) {
-//            if(isset($_SESSION['user_id'])) {
-//                $commentContent = htmlspecialchars($_POST['commentContent']);
-//                $postId = $_POST['post_id'];
-//
-//                $sql = $conn->prepare("INSERT INTO post_comment(comment_user_id, comment_content, post_id) VALUES (?, ?, ?)");
-//                $sql->bind_param("isi", $authorID, $commentContent, $postId);
-//                $sql->execute();
-//            } else {
-//                $error = "Kindly login to comment on posts";
-//            }
-//        }
 
-        $comments = mysqli_query($conn, "SELECT * FROM post_comment AS comment, post_data AS posts WHERE comment.post_id = posts.post_id");
-        $postComment = mysqli_fetch_all($comments, MYSQLI_ASSOC);
+        $postComments = mysqli_query($conn, "SELECT * FROM post_comment");
+        $postComment = mysqli_fetch_all($postComments, MYSQLI_ASSOC);
+//        print_r($postComment);
+
 ?>
 
 
@@ -144,12 +136,17 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div>
 
-                                    <?php foreach ($comments as $comment) { ?>
-                                        <?php echo $comment['comment_content']; ?>
+                            </div>
+                            <div>
+                                <!--                                   Display Comments-->
+
+                                    <?php foreach ($postComments as $comments){ ?>
+                                        <?php if($post['post_id'] == $comments['post_id']) { ?>
+                                            <p><?php echo $comments['comment_content']; ?></p>
+                                        <?php } ?>
                                     <?php } ?>
-                                </div>
+
                             </div>
                         <?php } ?>
 
