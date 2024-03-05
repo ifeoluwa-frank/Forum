@@ -28,7 +28,7 @@
         $postId = mysqli_fetch_all($postIds, MYSQLI_ASSOC);
 
 
-        $postComments = mysqli_query($conn, "SELECT * FROM post_comment");
+        $postComments = mysqli_query($conn, "SELECT * FROM post_comment AS posts, user_credentials AS users WHERE posts.comment_user_id = users.id");
         $postComment = mysqli_fetch_all($postComments, MYSQLI_ASSOC);
 //        print_r($postComment);
 
@@ -136,17 +136,32 @@
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
-                            <div>
+                            <div id="user-comment">
                                 <!--                                   Display Comments-->
 
                                     <?php foreach ($postComments as $comments){ ?>
                                         <?php if($post['post_id'] == $comments['post_id']) { ?>
-                                            <p><?php echo $comments['comment_content']; ?></p>
+                                            <div class="each-comment">
+                                                <div class="comment-profile">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke-width="1.5"
+                                                        stroke="currentColor"
+                                                        class="comment-post-icon">
+                                                        <path stroke-linecap="round"
+                                                              stroke-linejoin="round"
+                                                              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                    </svg>
+                                                    <b class="comment-author"><?php echo $comments['firstname'] . " " . $comments['lastname']; ?></b>
+                                                </div>
+                                                <div class="comment-text">
+                                                    <?php echo $comments['comment_content']; ?>
+                                                </div>
+                                            </div>
                                         <?php } ?>
                                     <?php } ?>
-
                             </div>
                         <?php } ?>
 

@@ -389,3 +389,28 @@ aside {
     margin-top: 6px;
     font-size: 18px;
 }
+.comment-post-icon {
+    width: 40px;
+    height: 40px;
+    stroke: #04AA6D;
+}
+.comment-profile{
+    display: inline-flex;
+}
+.comment-author {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.each-comment {
+    display: block;
+
+}
+.comment-text {
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+#user-comment {
+    background-color: #f8f9fa;
+    margin-top: 10px;
+    padding: 10px;
+}

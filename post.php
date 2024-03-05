@@ -7,6 +7,7 @@ $authorId = $_SESSION['user_id'];
 if(!isset($_SESSION['user_id']) && empty($_SESSION['user_id'])){ header('Location: login.php'); exit();}
 $target_dir = "uploads/";
 
+global $conn;
 $categories = mysqli_query($conn, "SELECT * FROM post_category");
 $postCategories = mysqli_fetch_all($categories, MYSQLI_ASSOC);
 
